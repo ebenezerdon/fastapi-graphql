@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "title": "Python variables explained",
+    "instructor": "Tracy Williams",
+    "publish_date": "12th May 2020"
+  },
+  {
+    "id": "2",
+    "title": "How to use functions in Python",
+    "instructor": "Jane Black",
+    "publish_date": "9th April 2018"
+  },
+  {
+    "id": "3",
+    "title": "Asynchronous Python",
+    "instructor": "Matthew Rivers",
+    "publish_date": "10th July 2020"
+  },
+  {
+    "id": "4",
+    "title": "Build a REST API",
+    "instructor": "Babatunde Mayowa",
+    "publish_date": "3rd March 2016"
+  },
+  {
+    "id": "5",
+    "title": "How to use dictionaries in Python",
+    "instructor": "Richard Cypher",
+    "publish_date": "12th July 2020"
+  },
+  {
+    "id": "6",
+    "title": "Python for Mathematicians",
+    "instructor": "Ebenezer Don",
+    "publish_date": "4th February 2015"
+  },
+  {
+    "id": "9",
+    "title": "This is a new course",
+    "instructor": "Ebenezer Don"
+  },
+  {
+    "id": "10",
+    "title": "This is a different course",
+    "instructor": "Ebenezer Don"
+  },
+  {
+    "id": "11",
+    "title": "This is a different course",
+    "instructor": "Ebenezer Don"
+  }
+]

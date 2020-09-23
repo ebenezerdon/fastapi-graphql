@@ -17,8 +17,29 @@ class Query(ObjectType):
         if course['id'] == id: return [course]
     return course_list
 
+class CreateCourse(Mutation):
+  course = Field(CourseType)
+
+  class Arguments:
+    id = String(required=True)
+    title = String(required=True)
+    instructor = String(required=True)
+    publish_date = String()
+
+  def mutate(self, info, id, title, instructor):
+    with open("./courses.json", "r+") as courses:
+      course_list = json.load(courses)
+      course_list.append({"id": id, "title": title, "instructor": instructor})
+      courses.seek(0)
+      json.dump(course_list, courses, indent=2)
+    course = course_list[-1]
+    return CreateCourse(course=course)
+
+class Mutation(ObjectType):
+  create_course = CreateCourse.Field()
+
 app = FastAPI()
 app.add_route("/", GraphQLApp(
-  schema=Schema(query=Query),
+  schema=Schema(query=Query, mutation=Mutation),
   executor_class=AsyncioExecutor)
 )

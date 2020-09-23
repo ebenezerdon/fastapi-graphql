@@ -26,7 +26,7 @@ class CreateCourse(Mutation):
     instructor = String(required=True)
     publish_date = String()
 
-  def mutate(self, info, id, title, instructor):
+  async def mutate(self, info, id, title, instructor):
     with open("./courses.json", "r+") as courses:
       course_list = json.load(courses)
 
@@ -37,11 +37,34 @@ class CreateCourse(Mutation):
       course_list.append({"id": id, "title": title, "instructor": instructor})
       courses.seek(0)
       json.dump(course_list, courses, indent=2)
-    course = course_list[-1]
-    return CreateCourse(course=course)
+    return CreateCourse(course=course_list[-1])
+
+class UpdateCourse(Mutation):
+  course = Field(CourseType)
+
+  class Arguments:
+    id = String(required=True)
+    title = String(required=True)
+    instructor = String(required=True)
+    publish_date = String()
+
+  async def mutate(self, info, id, title, instructor):
+    with open("./courses.json", "r+") as courses:
+      course_list = json.load(courses)
+
+      for course in course_list:
+        if course['id'] == id:
+          indexOfCourse = course_list.index(course)
+          course_list[indexOfCourse] = {"id": id, "title": title, "instructor": instructor}
+          courses.seek(0)
+          courses.truncate()
+
+          json.dump(course_list, courses, indent=2)
+    return UpdateCourse(course=course_list[indexOfCourse])
 
 class Mutation(ObjectType):
   create_course = CreateCourse.Field()
+  Update_course = UpdateCourse.Field()
 
 app = FastAPI()
 app.add_route("/", GraphQLApp(
